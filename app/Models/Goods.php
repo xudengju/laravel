@@ -20,14 +20,18 @@ class Goods extends Model
 
     public function getfind($id)
     {
-        if($this->where('type_id',$id)->first()){
-            return $this->where('type_id',$id)->first();
+        if($this->where('goods_id',$id)->first()){
+            return $this->where('goods_id',$id)->first();
         }else{
             return [];
         }
 
     }
-
+    //根据type_id查询商品
+    public function getGoods($type_id)
+    {
+        return $this->where(['type_id'=>$type_id])->get()->toArray();
+    }
     //查询全部数据
     public function getAll()
     {

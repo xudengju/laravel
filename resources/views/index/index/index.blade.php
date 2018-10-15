@@ -40,12 +40,19 @@
             <div class="fr">
                 <ul>
                     <li>
-                        <?php if($username){ ?>
-                            欢迎<?php echo $username?>登录
+                        <?php
+                        if(session()->get('user')){
+                            $user = session()->get('user');
+                            $user = unserialize($user);
+                        }
+                        $username = isset($user->user_name)?$user->user_name:'';
+                        $username = isset($user->user_email_name)?$user->user_email_name:'';
+                        if($username){ ?>
+                        欢迎<?php echo $username?>登录
                         <?php }?>
-                            <?php if($username==''){ ?>
-                            <a href="{{url('user/login')}}" target="_blank">未登录，点击登录</a>
-                            <?php }?>
+                        <?php if($username==''){ ?>
+                        <a href="{{url('user')}}" target="_blank">未登录，点击登录</a>
+                        <?php }?>
                     </li>
                     <li>|</li>
                     <li><a href="{{url('user/register')}}" target="_blank" >注册</a></li>
@@ -99,32 +106,32 @@
 
         <ul>
             @foreach ($type as $k=>$v)
-            <li>
-                <a href=""><?php echo $v['type_name']?></a>
-                @foreach ($v['child'] as $k=>$j)
-                <a href=""><?php echo $j['type_name']?></a>
-                @endforeach;
-                <div class="pop">
-                    @foreach($j['child'] as $k=>$r)
-                        @if($j['type_id'] == $r['p_id'])
-                    <div class="left fl" style="height: 80px;">
-                        <div>
-                            <div class="xuangou_left fl">
-                                <a href="{{$r['url']}}">
-                                    <div class="img fl"><img src="/image/xm6_80.png" alt=""></div>
-                                    <span class="fl">{{$r['type_name']}}</span>
-                                    <div class="clear"></div>
-                                </a>
-                            </div>
-                            <div class="xuangou_right fr"><a href="{{url('goods/particulars')}}" target="_blank">选购</a></div>
-                            <div class="clear"></div>
-                        </div>
+                <li>
+                    <a href=""><?php echo $v['type_name']?></a>
+                    @foreach ($v['child'] as $k=>$j)
+                        <a href=""><?php echo $j['type_name']?></a>
+                    @endforeach;
+                    <div class="pop">
+                        @foreach($j['child'] as $k=>$r)
+                            @if($j['type_id'] == $r['p_id'])
+                                <div class="left fl" style="height: 80px;">
+                                    <div>
+                                        <div class="xuangou_left fl">
+                                            <a href="{{$r['url']}}?type_id={{$r['type_id']}}">
+                                                <div class="img fl"><img src="/image/xm6_80.png" alt=""></div>
+                                                <span class="fl">{{$r['type_name']}}</span>
+                                                <div class="clear"></div>
+                                            </a>
+                                        </div>
+                                        <div class="xuangou_right fr"><a href="{{url('goods/particulars')}}" target="_blank">选购</a></div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                        <div class="clear"></div>
                     </div>
-                        @endif
-                      @endforeach
-                    <div class="clear"></div>
-                </div>
-            </li>
+                </li>
             @endforeach
         </ul>
 
@@ -165,8 +172,8 @@
             <div class="youhui">5月9日-21日享花呗12期分期免息</div>
             <div class="jiage"><?php echo $v['goods_price']?>元起</div>
         </div>
-            <?php }?>
-          <div class="clear"></div>
+        <?php }?>
+        <div class="clear"></div>
 
     </div>
 </div>
@@ -177,19 +184,19 @@
             <div class="remen fl"><a href=""><img src="/image/peijian1.jpg"></a>
             </div>
             @foreach($result as $k=>$rs)
-            <div class="remen fl">
-                <div class="xinpin"><span>新品</span></div>
-                <div class="tu"><a href=""><img src="{{$rs['goods_img']}}"></a></div>
-                <div class="miaoshu"><a href="">{{$rs['goods_name']}}</a></div>
-                <div class="jiage">{{$rs['goods_price']}}元</div>
-                <div class="pingjia">372人评价</div>
-                <div class="piao">
-                    <a href="">
-                        <span>发货速度很快！很配小米6！</span>
-                        <span>来至于mi狼牙的评价</span>
-                    </a>
+                <div class="remen fl">
+                    <div class="xinpin"><span>新品</span></div>
+                    <div class="tu"><a href=""><img src="{{$rs['goods_img']}}"></a></div>
+                    <div class="miaoshu"><a href="">{{$rs['goods_name']}}</a></div>
+                    <div class="jiage">{{$rs['goods_price']}}元</div>
+                    <div class="pingjia">372人评价</div>
+                    <div class="piao">
+                        <a href="">
+                            <span>发货速度很快！很配小米6！</span>
+                            <span>来至于mi狼牙的评价</span>
+                        </a>
+                    </div>
                 </div>
-            </div>
             @endforeach
 
             <div class="clear"></div>

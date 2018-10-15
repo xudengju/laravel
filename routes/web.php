@@ -15,12 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('new/new','Index\NewController@new');
+
+Route::get('/','Index\IndexController@index');
 //邮件发送
 Route::get('mail/send','MailController@send');
 
 Route::get('new/show','Index\NewController@show');
 //用户登录
-Route::get('user/login','Index\UserController@login');
+Route::get('user/user','Index\UserController@user');
 //用户注册
 Route::any('user/register','Index\UserController@register');
 //主页
@@ -44,10 +46,19 @@ Route::any('user/emailLogin','Index\UserController@emailLogin');
 //邮箱注册跳转
 Route::any('emailRegister','Index\UserController@emailRegister');
 //登录
-Route::post('login','Index\UserController@login');
+Route::post('user','Index\UserController@user');
 //退出登录
 Route::get('user/loginOut','Index\UserController@loginOut');
 //邮箱登录
 Route::post('emailLogin','Index\UserController@emailLogin');
 
 Route::post('user/captcha','Index\UserController@captcha');
+
+
+//后台
+//登录
+Route::get('user/login','Admin\UserController@login');
+//注册
+Route::get('user/register','Admin\UserController@register');
+//后台首页
+Route::get('index/index','Admin\IndexController@index');

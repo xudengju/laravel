@@ -49,7 +49,7 @@ class UserController extends Controller
                 return view('jump')->with([
                     'message' => '登录失败，手机号或密码错误',
                     'name' => '登录',
-                    'url' => '/index.php/user/login',
+                    'url' => '/index.php/user/user',
                     'jumpTime' => '2',
                 ]);
             }

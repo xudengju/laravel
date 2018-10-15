@@ -9,7 +9,7 @@
 
 </head>
 <body>
-<!-- login -->
+<!-- user -->
 <div class="top center">
     <div class="logo center">
         <a href="{{url('index/index')}}" target="_blank"><img src="/image/mistore_logo.png" alt=""></a>

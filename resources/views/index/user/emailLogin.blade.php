@@ -9,7 +9,7 @@
 
 </head>
 <body>
-<!-- login -->
+<!-- user -->
 <div class="top center">
     <div class="logo center">
         <a href="{{url('index/index')}}" target="_blank"><img src="/image/mistore_logo.png" alt=""></a>
@@ -20,7 +20,7 @@
         <div class="login_center">
             <div class="login_top">
                 <div class="left fl">邮箱登录</div>
-                <div class="right fr">您还不是我们的会员？<a href="{{url('user/login')}}">手机号登录</a> <a href="{{url('user/register')}}" target="_self">立即注册</a></div>
+                <div class="right fr">您还不是我们的会员？<a href="{{url('user')}}">手机号登录</a> <a href="{{url('user/register')}}" target="_self">立即注册</a></div>
                 <div class="clear"></div>
                 <div class="xian center"></div>
             </div>
