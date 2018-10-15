@@ -19,7 +19,7 @@
     <div class="wxts fl ml20">温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算</div>
     <div class="dlzc fr">
         <ul>
-            <li><a href="{{url('user/login')}}" target="_blank">登录</a></li>
+            <li><a href="{{url('user')}}" target="_blank">登录</a></li>
             <li>|</li>
             <li><a href="{{url('user/register')}}" target="_blank">注册</a></li>
         </ul>

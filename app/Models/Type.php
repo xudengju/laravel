@@ -19,14 +19,19 @@ class Type extends Model
 
     public function getFind($id)
     {
-        if($this->where('id',$id)->first()){
-            return $this->where('id',$id)->first()->toArray();
+        if($this->where('type_id',$id)->first()){
+            return $this->where('type_id',$id)->first()->toArray();
         }else{
             return [];
         }
 
     }
 
+    //根据type_id查到父级id
+    public function getType($type_id)
+    {
+        return $this->where('type_id',$type_id)->first()->toArray();
+    }
 
 
 

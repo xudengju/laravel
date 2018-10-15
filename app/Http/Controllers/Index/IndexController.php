@@ -22,18 +22,12 @@ class IndexController extends Controller
      */
     public function index()
     {
-        if(session()->get('user')){
-            $user = session()->get('user');
-            $user = unserialize($user);
-        }
-        $username = isset($user->user_name)?$user->user_name:'';
-        if (Redis::get('type')&&Redis::get('res')&&Redis::get('result')){
-           $type = unserialize(Redis::get('type'));
-           $res = unserialize(Redis::get('res'));
-           $result = unserialize(Redis::get('result'));
-         }else{
 
-//        var_dump($username);die;
+        if (Redis::get('type')&&Redis::get('res')&&Redis::get('result')){
+            $type = unserialize(Redis::get('type'));
+            $res = unserialize(Redis::get('res'));
+            $result = unserialize(Redis::get('result'));
+        }else{
             $index = new IndexService();
             $type = $index->type();
             $res = $index->goods();
@@ -45,7 +39,7 @@ class IndexController extends Controller
             Redis::set('res',$goods);
             Redis::set('result',$parts);
         }
-//        var_dump($result);die;
-        return view('index\index\index',['username'=>$username,'type'=>$type,'res'=>$res,'result'=>$result]);
+//        var_dump($type);die;
+        return view('index/index/index',['type'=>$type,'res'=>$res,'result'=>$result]);
     }
 }

@@ -39,7 +39,7 @@
             <div class="gouwuche fr"><a href="">购物车</a></div>
             <div class="fr">
                 <ul>
-                    <li><a href="{{url('user/login')}}" target="_blank">登录</a></li>
+                    <li><a href="{{url('user')}}" target="_blank">登录</a></li>
                     <li>|</li>
                     <li><a href="{{url('user/register')}}" target="_blank" >注册</a></li>
                     <li>|</li>
@@ -91,15 +91,16 @@
 <!-- start danpin -->
 <div class="danpin center">
 
-    <div class="biaoti center">小米手机</div>
+    <div class="biaoti center">{{$parent_name}} {{$p_name}} </div>
     <div class="main center">
+        @foreach($goods as $k=>$v)
         <div class="mingxing fl mb20" style="border:2px solid #fff;width:230px;cursor:pointer;" onmouseout="this.style.border='2px solid #fff'" onmousemove="this.style.border='2px solid red'">
-            <div class="sub_mingxing"><a href="{{url('goods/order')}}" target="_blank"><img src="/image/liebiao_xiaomi6.jpg" alt=""></a></div>
-            <div class="pinpai"><a href="{{url('goods/order')}}" target="_blank">小米6</a></div>
+            <div class="sub_mingxing"><a href="{{url('goods/order')}}" target="_blank"><img src="{{$v['goods_img']}}" alt=""></a></div>
+            <div class="pinpai"><a href="{{url('goods/order')}}" target="_blank">{{$v['goods_name']}}</a></div>
             <div class="youhui">5.16早10点开售</div>
-            <div class="jiage">2499.00元</div>
+            <div class="jiage">{{$v['goods_price']}}</div>
         </div>
-
+        @endforeach
         <div class="clear"></div>
     </div>
 </div>
