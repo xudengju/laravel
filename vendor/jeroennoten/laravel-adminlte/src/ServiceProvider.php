@@ -11,6 +11,7 @@ use JeroenNoten\LaravelAdminLte\Console\AdminLteMakeCommand;
 use JeroenNoten\LaravelAdminLte\Console\MakeAdminLteCommand;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use JeroenNoten\LaravelAdminLte\Http\ViewComposers\AdminLteComposer;
+use  App\Services\AdminIndexService;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -108,8 +109,11 @@ class ServiceProvider extends BaseServiceProvider
     public static function registerMenu(Dispatcher $events, Repository $config)
     {
         $events->listen(BuildingMenu::class, function (BuildingMenu $event) use ($config) {
-            $menu = $config->get('adminlte.menu');
-            call_user_func_array([$event->menu, 'add'], $menu);
+//            $menu = $config->get('adminlte.menu');
+//            $menu =  AdminIndexService::menu();
+            $menu = new AdminIndexService();
+            $data = $menu->menu();
+            call_user_func_array([$event->menu, 'add'], $data);
         });
     }
 }
