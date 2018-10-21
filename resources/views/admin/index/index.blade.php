@@ -5,11 +5,12 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
-@stop
-
-@section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <?php
+     $user = session()->get('user');
+     $username = $user['user_name'];
+    if($username){ ?>
+    <h1>欢迎<?php echo $username?>登录</h1>
+    <?php }?>
 @stop
 
 @section('css')

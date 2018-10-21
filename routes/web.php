@@ -22,7 +22,7 @@ Route::get('mail/send','MailController@send');
 
 Route::get('new/show','Index\NewController@show');
 //用户登录
-Route::get('user/user','Index\UserController@user');
+Route::get('user/login','Index\UserController@login');
 //用户注册
 Route::any('user/register','Index\UserController@register');
 //主页
@@ -46,7 +46,7 @@ Route::any('user/emailLogin','Index\UserController@emailLogin');
 //邮箱注册跳转
 Route::any('emailRegister','Index\UserController@emailRegister');
 //登录
-Route::post('user','Index\UserController@user');
+Route::post('login','Index\UserController@login');
 //退出登录
 Route::get('user/loginOut','Index\UserController@loginOut');
 //邮箱登录
@@ -57,8 +57,43 @@ Route::post('user/captcha','Index\UserController@captcha');
 
 //后台
 //登录
-Route::get('user/login','Admin\UserController@login');
-//注册
-Route::get('user/register','Admin\UserController@register');
-//后台首页
-Route::get('index/index','Admin\IndexController@index');
+Route::group(['middleware' => ['login']], function () {
+    //后台首页
+    Route::get('adminindex/index','Admin\AdminIndexController@index');
+    Route::get('admingoods/add','Admin\AdminGoodsController@add');
+    Route::get('admingoods/list','Admin\AdminGoodsController@list');
+    Route::get('adminuser/add','Admin\AdminUserController@add');
+    Route::post('add','Admin\AdminUserController@add');
+    Route::get('adminuser/delete','Admin\AdminUserController@delete');
+    Route::get('adminuser/userSave','Admin\AdminUserController@userSave');
+    Route::post('userUpdate','Admin\AdminUserController@userUpdate');
+    Route::get('adminuser/list','Admin\AdminUserController@list');
+    Route::get('adminuser/roleAdd','Admin\AdminUserController@roleAdd');
+    Route::get('adminuser/roleDelete','Admin\AdminUserController@roleDelete');
+    Route::get('adminuser/roleSave','Admin\AdminUserController@roleSave');
+    Route::post('roleUpdate','Admin\AdminUserController@roleUpdate');
+    Route::post('roleAdd','Admin\AdminUserController@roleAdd');
+    Route::get('adminuser/roleList','Admin\AdminUserController@roleList');
+    Route::get('adminuser/nodeList','Admin\AdminUserController@nodeList');
+    Route::post('nodeAdd','Admin\AdminUserController@nodeAdd');
+    Route::get('adminuser/nodeDelete','Admin\AdminUserController@nodeDelete');
+    Route::get('adminuser/nodeSave','Admin\AdminUserController@nodeSave');
+    Route::post('nodeUpdate','Admin\AdminUserController@nodeUpdate');
+    Route::get('adminuser/nodeAdd','Admin\AdminUserController@nodeadd');
+    Route::get('adminuser/userRole','Admin\AdminUserController@userRole');
+    Route::post('userRoleAdd','Admin\AdminUserController@userRoleAdd');
+    Route::get('adminuser/roleNode','Admin\AdminUserController@roleNode');
+    Route::get('manage','Admin\AdminUserController@manage');
+    Route::post('roleMenuAdd','Admin\AdminUserController@roleMenuAdd');
+});
+Route::resource('/prompt','PromptController');
+Route::get('adminuser/login','Admin\AdminUserController@login');
+
+Route::post('adminuser/loginout','Admin\AdminUserController@loginout');
+
+
+Route::post('adminlogin','Admin\AdminUserController@login');
+
+
+//Auth::routes();
+//Route::get('/home', 'HomeController@index')->name('home');

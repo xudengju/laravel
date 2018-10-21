@@ -10,13 +10,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\Goods;
-use App\Models\Type;
+use  App\Services\AdminIndexService;
+use  App\Services\AdminUserService;
 
-class IndexController extends Controller
+class AdminIndexController extends Controller
 {
      public function index()
      {
+//         $index = new AdminUserService();
+//         $data = $index->getUrl('admingoods/add',1);
+//         dd($data);
          return view('admin.index.index');
      }
+
 }

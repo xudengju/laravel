@@ -28,7 +28,7 @@ class UserService extends Controller
             ];
             $user_data = DB::table('user')->where($where)->first();
            $username = serialize($user_data);
-           session()->put("user", $username);
+           session()->put("users", $username);
             return $user_data;
          }
        }
@@ -45,7 +45,7 @@ class UserService extends Controller
                 ];
                 $user_data = DB::table('user_email')->where($where)->first();
                 $username = serialize($user_data);
-                session()->put("user", $username);
+                session()->put("users", $username);
                 return $user_data;
             }
         }
@@ -87,7 +87,7 @@ class UserService extends Controller
                        $post['user_id'] = $id;
                        $post = (object)$post;
                        $username = serialize($post);
-                       session()->put("user", $username);
+                       session()->put("users", $username);
                        //注册成功
                        return 2;
                    }
@@ -133,7 +133,7 @@ class UserService extends Controller
                     $post['user_id'] = $id;
                     $post = (object)$post;
                     $username = serialize($post);
-                    session()->put("user", $username);
+                    session()->put("users", $username);
                     $user =$this->email($id);
                     $this->dispatch(new SendEmail($user));
                     return $id;

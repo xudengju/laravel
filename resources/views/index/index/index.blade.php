@@ -41,8 +41,8 @@
                 <ul>
                     <li>
                         <?php
-                        if(session()->get('user')){
-                            $user = session()->get('user');
+                        if(session()->get('users')){
+                            $user = session()->get('users');
                             $user = unserialize($user);
                         }
                         $username = isset($user->user_name)?$user->user_name:'';
@@ -51,7 +51,7 @@
                         欢迎<?php echo $username?>登录
                         <?php }?>
                         <?php if($username==''){ ?>
-                        <a href="{{url('user')}}" target="_blank">未登录，点击登录</a>
+                        <a href="{{url('user/login')}}" target="_blank">未登录，点击登录</a>
                         <?php }?>
                     </li>
                     <li>|</li>
