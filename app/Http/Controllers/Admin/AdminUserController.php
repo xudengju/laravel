@@ -28,6 +28,14 @@ class AdminUserController extends Controller
              array_shift($data);
              $adminUser = new AdminUserService();
              $userData = $adminUser->login($data);
+             if ($userData==false){
+                 return view('jump')->with([
+                     'message' => '抱歉，你的用户被冻结请及时联系超级管理员',
+                     'name' => '登录',
+                     'url' => '/adminuser/login',
+                     'jumpTime' => '2',
+                 ]);
+             }
              if ($userData){
                  return view('jump')->with([
                      'message' => '登录成功',
@@ -128,6 +136,20 @@ class AdminUserController extends Controller
          $user = $userData->list();
 //         dd($user);
          return view('admin.user.list',['user'=>$user]);
+     }
+     /*
+      * 修改管理员状态
+      * */
+     public function manage(Request $request)
+     {
+         $status = $request->get('status');
+         $user_id = $request->get('user_id');
+         $adminUser = new AdminUserService();
+//         dd($status);
+         $id = $adminUser->upStatus($status,$user_id);
+         if($id){
+             return redirect('adminuser/list');
+         }
      }
      /*
       * 角色添加
@@ -341,7 +363,7 @@ class AdminUserController extends Controller
                      $userRole = $adminUser->userRolesAdd($arr);
                  }
              }
-             if($userRole==0){
+             if($userRole){
                  return view('jump')->with([
                      'message' => '分配角色成功',
                      'name' => '权限列表',
@@ -360,7 +382,7 @@ class AdminUserController extends Controller
                  $arr['role_id']=$data['role_id'][$i];
                  $userRole = $adminUser->userRolesAdd($arr);
              }
-             if($userRole==0) {
+             if($userRole) {
                  return view('jump')->with([
                      'message' => '分配角色成功',
                      'name' => '权限列表',
@@ -371,17 +393,21 @@ class AdminUserController extends Controller
          }
 
      }
-
+     /*
+      * 角色权限
+      * */
      public function roleNode(Request $request)
      {
          $role_id = $request->get('id');
          $adminUser = new AdminUserService();
-         $data = $adminUser->nodelist();
+         $data = $adminUser->nodeAll();
          $role = $adminUser->getRole($role_id);
 //         dd($data);
          return view('admin.user.roleNode',['data'=>$data,'role'=>$role]);
      }
-
+     /*
+      * 角色权限添加
+      * */
      public function roleMenuAdd(Request $request)
      {
          $data = $request->all();

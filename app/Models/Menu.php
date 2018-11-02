@@ -40,8 +40,13 @@ class Menu extends Model
     {
         return $this->where('menu_id',$id)->delete();
     }
-
-
+    /*
+     * 全部数据
+     * */
+     public function allData()
+     {
+         return $this->get()->toArray();
+     }
 
 //查询全部数据 无限极分类
     public function getAll()
@@ -72,7 +77,7 @@ class Menu extends Model
 
    public function getMenu($menu_id)
    {
-       return $this->whereIn('menu_id',$menu_id)->get()->toArray();
+       return $this->whereIn('menu_id',$menu_id)->where('is_menu',1)->get()->toArray();
    }
 
    public function getUrl($menu_id)

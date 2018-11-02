@@ -75,6 +75,13 @@ class AdminUser extends Model
     {
         return $this->hasMany('App\Models\type','type_id');
     }
+    /*
+     * 修改状态
+     * */
+    public function updateStatus($user_id,$status)
+    {
+        return $this->where('user_id',$user_id)->update($status);
+    }
 
 
 }
