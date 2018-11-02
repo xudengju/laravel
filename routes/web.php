@@ -60,31 +60,96 @@ Route::post('user/captcha','Index\UserController@captcha');
 Route::group(['middleware' => ['login']], function () {
     //后台首页
     Route::get('adminindex/index','Admin\AdminIndexController@index');
+    //后台商品添加
     Route::get('admingoods/add','Admin\AdminGoodsController@add');
+    Route::post('goodsAdd','Admin\AdminGoodsController@add');
+    //商品列表
     Route::get('admingoods/list','Admin\AdminGoodsController@list');
+    //商品删除
+    Route::get('adminGoods/delete','Admin\AdminGoodsController@delete');
+    //商品修改
+    Route::get('adminGoods/goodsSave','Admin\AdminGoodsController@goodsSave');
+    Route::post('goodsUpdate','Admin\AdminGoodsController@goodsUpdate');
+    // 商品分类列表
+    Route::get('adminGoods/typeList','Admin\AdminGoodsController@typeList');
+    //商品分类添加
+    Route::get('adminGoods/typeAdd','Admin\AdminGoodsController@typeAdd');
+    Route::post('typeAdd','Admin\AdminGoodsController@typeAdd');
+    //商品分类删除
+    Route::get('adminGoods/typeDelete','Admin\AdminGoodsController@typeDelete');
+    //商品分类修改
+    Route::get('adminGoods/typeSave','Admin\AdminGoodsController@typeSave');
+    Route::post('typeUpdate','Admin\AdminGoodsController@typeUpdate');
+    //管理员添加
     Route::get('adminuser/add','Admin\AdminUserController@add');
     Route::post('add','Admin\AdminUserController@add');
+    //管理员删除
     Route::get('adminuser/delete','Admin\AdminUserController@delete');
+    //管理员修改
     Route::get('adminuser/userSave','Admin\AdminUserController@userSave');
     Route::post('userUpdate','Admin\AdminUserController@userUpdate');
+    //管理员列表
     Route::get('adminuser/list','Admin\AdminUserController@list');
+    //角色添加
     Route::get('adminuser/roleAdd','Admin\AdminUserController@roleAdd');
+    Route::post('roleAdd','Admin\AdminUserController@roleAdd');
+    //角色删除
     Route::get('adminuser/roleDelete','Admin\AdminUserController@roleDelete');
+    //角色修改
     Route::get('adminuser/roleSave','Admin\AdminUserController@roleSave');
     Route::post('roleUpdate','Admin\AdminUserController@roleUpdate');
-    Route::post('roleAdd','Admin\AdminUserController@roleAdd');
+    //角色列表
     Route::get('adminuser/roleList','Admin\AdminUserController@roleList');
+    //权限列表
     Route::get('adminuser/nodeList','Admin\AdminUserController@nodeList');
+    //权限添加
+    Route::get('adminuser/nodeAdd','Admin\AdminUserController@nodeadd');
     Route::post('nodeAdd','Admin\AdminUserController@nodeAdd');
+    //权限删除
     Route::get('adminuser/nodeDelete','Admin\AdminUserController@nodeDelete');
+    //权限修改
     Route::get('adminuser/nodeSave','Admin\AdminUserController@nodeSave');
     Route::post('nodeUpdate','Admin\AdminUserController@nodeUpdate');
-    Route::get('adminuser/nodeAdd','Admin\AdminUserController@nodeadd');
+    //用户分配角色
     Route::get('adminuser/userRole','Admin\AdminUserController@userRole');
     Route::post('userRoleAdd','Admin\AdminUserController@userRoleAdd');
+    //角色分配权限
     Route::get('adminuser/roleNode','Admin\AdminUserController@roleNode');
-    Route::get('manage','Admin\AdminUserController@manage');
     Route::post('roleMenuAdd','Admin\AdminUserController@roleMenuAdd');
+    //修改用户状态
+    Route::get('manage','Admin\AdminUserController@manage');
+    //属性列表
+    Route::get('adminGoods/attrList','Admin\AdminGoodsController@attrList');
+    //属性删除
+    Route::get('adminGoods/attrDelete','Admin\AdminGoodsController@attrDelete');
+    //属性修改
+    Route::get('adminGoods/attrSave','Admin\AdminGoodsController@attrSave');
+    Route::post('attrUpdate','Admin\AdminGoodsController@attrUpdate');
+    //属性添加
+    Route::get('adminGoods/attrAdd','Admin\AdminGoodsController@attrAdd');
+    Route::post('attrAdd','Admin\AdminGoodsController@attrAdd');
+    //属性值添加
+    Route::get('adminGoods/attrValueAdd','Admin\AdminGoodsController@attrValueAdd');
+    Route::post('attrValueAdd','Admin\AdminGoodsController@attrValueAdd');
+    //属性值列表
+    Route::get('adminGoods/attrValueList','Admin\AdminGoodsController@attrValueList');
+    //属性值删除
+    Route::get('adminGoods/attrValueDelete','Admin\AdminGoodsController@attrValueDelete');
+    //属性值修改
+    Route::get('adminGoods/attrValueSave','Admin\AdminGoodsController@attrValueSave');
+    Route::post('attrValueUpdate','Admin\AdminGoodsController@attrValueUpdate');
+    //分配属性
+    Route::get('adminGoods/typeAttr','Admin\AdminGoodsController@typeAttr');
+    Route::post('typeAttrAdd','Admin\AdminGoodsController@typeAttrAdd');
+    //分配属性值
+    Route::get('adminGoods/attrValueNode','Admin\AdminGoodsController@attrValueNode');
+    Route::post('attrValueNodeAdd','Admin\AdminGoodsController@attrValueNodeAdd');
+    //sku添加
+    Route::get('adminGoods/skuAdd','Admin\AdminGoodsController@skuAdd');
+    Route::post('adminGoods/getAttrs','Admin\AdminGoodsController@getAttrs');
+    Route::post('getAttrValue','Admin\AdminGoodsController@getAttrValue');
+    Route::post('adminGoods/getAttrAttrValue','Admin\AdminGoodsController@getAttrAttrValue');
+
 });
 Route::resource('/prompt','PromptController');
 Route::get('adminuser/login','Admin\AdminUserController@login');
