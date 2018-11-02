@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Type extends Model
+class Cargo extends Model
 {
-    protected $table = 'type';
+    protected $table = 'cargo';
     public $timestamps = false;
 
     //添加 返回id
@@ -71,9 +71,9 @@ class Type extends Model
     /*
      * 删除
      * */
-    public function del($type_id,$data)
+    public function del($type_id)
     {
-        return $this->where('type_id',$type_id)->update($data);
+        return $this->where('type_id',$type_id)->delete();
     }
 
     /*
@@ -90,5 +90,11 @@ class Type extends Model
     {
         return $this->where('is_delete',0)->get()->toArray();
     }
-
+    /*
+     * 根据type_id查询出attr_id
+     * */
+    public function getAttrs($type_id)
+    {
+        return $this->where('type_id',$type_id)->get(['attr_id'])->toArray();
+    }
 }

@@ -21,6 +21,9 @@ use App\Models\Email_user;
 
 class AdminUserService extends Controller
 {
+    /*
+     * 登录
+     * */
        public function login($data)
        {
             $adminUser = new AdminUser();
@@ -32,6 +35,9 @@ class AdminUserService extends Controller
             if($userData){
                 $arr['login_time'] =date("Y-m-d H:i:s");
                 $adminUser->upUser($userData['user_id'],$arr);
+                if($userData['status']==1){
+                   return false;
+                }
                 session()->put("user", $userData);
             }
             return $userData;
@@ -100,7 +106,29 @@ class AdminUserService extends Controller
         $menuData = $menu->getAll();
         return $menuData;
     }
-
+   public function nodeAll()
+   {
+       $menu = new Menu();
+       $data = $menu->allData();
+       $cate = $this->getCid($data);
+       return $cate;
+   }
+    /*
+      * 无限极分类
+      * */
+    public function getCid($cate, $name = 'submenu', $p_id = 0)
+    {
+        $arr = array();
+        foreach ($cate as $v)
+        {
+            if ($v['p_id'] == $p_id)
+            {
+                $v["$name"] = $this->getCid($cate, $name, $v['menu_id']);
+                $arr[]    = array_filter($v);
+            }
+        }
+        return $arr;
+    }
     /*
      * 权限添加
      * */
@@ -251,6 +279,7 @@ class AdminUserService extends Controller
         $role = new UserRole();
         $resource = new ReourceRole();
         $menu = new Menu();
+
         $role_id = $role->getRole($user_id);
         $num = count($role_id);
         for ($i=0;$i<$num;$i++){
@@ -266,6 +295,10 @@ class AdminUserService extends Controller
                 $url1[] = $urls[$i]['url'];
             }
             $urlSubstr = substr($url,1);
+            if(strpos($url,"?")){
+                $first = strpos($url,"?");
+                $urlSubstr = substr($url,1,$first-1);
+            }
 //         dd($urlSubstr);
             if (in_array($urlSubstr,$url1)){
                 return true;
@@ -276,6 +309,25 @@ class AdminUserService extends Controller
             return false;
         }
 
+    }
+    /*
+     * 修改用户状态
+     * */
+    public function upStatus($status,$user_id)
+    {
+        $adminUser = new AdminUser();
+        if($status==1){
+            $status = 0;
+        }else{
+            $status = 1;
+        }
+//        dd($status);
+        $statusData = [
+            'status'=>$status
+        ];
+//        dd($statusData);
+        $id = $adminUser->updateStatus($user_id,$statusData);
+        return $id;
     }
 
 }

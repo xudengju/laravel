@@ -42,10 +42,10 @@
                 <td>{{$v['create_user']}}</td>
                 <td>
                     @if($v['status']==1)
-                        <a href="{{url('manage')}}?status={{$v['status']}}" style="color: red">冻结</a>
+                        <a href="{{url('manage')}}?status={{$v['status']}}&user_id={{$v['user_id']}}" style="color: red">冻结</a>
                     @endif
                     @if($v['status']==0)
-                            <a href="{{url('manage')}}?status={{$v['status']}}" style="color: green">正常</a>
+                            <a href="{{url('manage')}}?status={{$v['status']}}&user_id={{$v['user_id']}}" style="color: green">正常</a>
                     @endif
                 </td>
                 <td>{{$v['create_time']}}</td>
